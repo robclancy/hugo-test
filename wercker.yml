@@ -20,14 +20,10 @@ build:
     # Read more about steps on our dev center:
     # http://devcenter.wercker.com/docs/steps/index.html
   steps:
-    # - arjen/hugo-build:
-    #     version: "0.14"
-    #     theme: herring-cove
-    #     flags: --buildDrafts=true
-    - script:
-        name: echo
-        code: |
-          echo "hello world!"
+    - arjen/hugo-build:
+        version: "0.14"
+        theme: herring-cove
+        flags: --buildDrafts=true
 deploy:
   steps:
     - script:
@@ -40,7 +36,9 @@ deploy:
           curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
           sudo apt-get update && sudo apt-get install -y -qq google-cloud-sdk
 
-    - a13m/gcs-website-deploy@1.0.5:
-        bucket: robertclancy.com
+    - script:
+        name: gsutil rsync
+        code: |
+          gsutil -m rysnc -d -r public gs://robertclancy.com
         project: $GOOGLE_PROJECT_ID
         token: $GOOGLE_REFRESH_TOKEN
