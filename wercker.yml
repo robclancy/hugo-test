@@ -34,8 +34,11 @@ deploy:
         name: install gsutil
         code: |
           sudo apt-get update
-          sudo apt-get install -y -qq curl
-          curl https://sdk.cloud.google.com | bash 
+          sudo apt-get install -y -qq lsb-release
+          export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)"
+          echo "deb https://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+          curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+          sudo apt-get update && sudo apt-get install google-cloud-sdk
 
     - a13m/gcs-website-deploy@1.0.5:
         bucket: robertclancy.com
