@@ -20,14 +20,14 @@ build:
     # Read more about steps on our dev center:
     # http://devcenter.wercker.com/docs/steps/index.html
   steps:
-    - arjen/hugo-build:
-        version: "0.14"
-        theme: herring-cove
-        flags: --buildDrafts=true
+    # - arjen/hugo-build:
+    #     version: "0.14"
+    #     theme: herring-cove
+    #     flags: --buildDrafts=true
 deploy:
   steps:
     - script:
-        name: install gsutil
+        name: install google-cloud-sdk
         code: |
           sudo apt-get update
           sudo apt-get install -y -qq lsb-release curl apt-transport-https
@@ -35,10 +35,12 @@ deploy:
           echo "deb https://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
           curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
           sudo apt-get update && sudo apt-get install -y -qq google-cloud-sdk
+    - script:
+        name: authenticate google-cloud-sdk
+        code: |
           echo $GOOGLE_SERVICE_ACCOUNT_JSON > robclancy-5ee82cf4a4e9.json
           cat robclancy-5ee82cf4a4e9.json
           gcloud auth activate-service-account cloud-storage@robclancy-150106.iam.gserviceaccount.com --key-file=robclancy-5ee82cf4a4e9.json
-
     - script:
         name: gsutil rsync
         code: |
