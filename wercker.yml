@@ -30,7 +30,7 @@ build:
           echo "hello world!"
 deploy:
   steps:
-    - michilu/gcs-website-deploy:
+    - a13m/gcs-website-deploy@1.0.5:
       bucket: robertclancy.com
       project: $GOOGLE_PROJECT_ID
       token: $GOOGLE_REFRESH_TOKEN
