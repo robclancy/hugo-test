@@ -31,6 +31,6 @@ build:
 deploy:
   steps:
     - michilu/gcs-website-deploy:
-      bucket:   example.com
-      project:  $GOOGLE_PROJECT_ID
-      token:    $GOOGLE_REFRESH_TOKEN
+      bucket: robertclancy.com
+      project: $GOOGLE_PROJECT_ID
+      token: $GOOGLE_REFRESH_TOKEN
