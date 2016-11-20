@@ -39,4 +39,4 @@ deploy:
     - script:
         name: gsutil rsync
         code: |
-          gsutil -m -o "Credentials:gs_oauth2_refresh_token=$GOOGLE_REFRESH_TOKEN" rsync -d -r public gs://robertclancy.com
+          echo gsutil -m -o "Credentials:gs_oauth2_refresh_token=$GOOGLE_REFRESH_TOKEN" rsync -d -r public gs://robertclancy.com
