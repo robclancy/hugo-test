@@ -20,10 +20,10 @@ build:
     # Read more about steps on our dev center:
     # http://devcenter.wercker.com/docs/steps/index.html
   steps:
-    # - arjen/hugo-build:
-    #     version: "0.14"
-    #     theme: herring-cove
-    #     flags: --buildDrafts=true
+    - arjen/hugo-build:
+        version: "0.14"
+        theme: herring-cove
+        flags: --buildDrafts=true
 deploy:
   steps:
     - script:
@@ -44,4 +44,5 @@ deploy:
     - script:
         name: gsutil rsync
         code: |
-          gsutil -m rsync -d -r public gs://robertclancy.com
+          ls
+          gsutil -m rsync -d -r public/ gs://robertclancy.com
