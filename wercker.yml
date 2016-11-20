@@ -39,6 +39,7 @@ deploy:
         name: authenticate google-cloud-sdk
         code: |
           echo -n $GOOGLE_SERVICE_ACCOUNT_JSON > robclancy-5ee82cf4a4e9.json
+          cat robclancy-5ee82cf4a4e9.json
           gcloud auth activate-service-account cloud-storage@robclancy-150106.iam.gserviceaccount.com --key-file=robclancy-5ee82cf4a4e9.json
     - script:
         name: gsutil rsync
