@@ -28,3 +28,9 @@ build:
         name: echo
         code: |
           echo "hello world!"
+deploy:
+  steps:
+    - michilu/gcs-website-deploy:
+      bucket:   example.com
+      project:  $GOOGLE_PROJECT_ID
+      token:    $GOOGLE_REFRESH_TOKEN
