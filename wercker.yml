@@ -39,6 +39,6 @@ deploy:
     - script:
         name: gsutil rsync
         code: |
-          gsutil -m rysnc -d -r public gs://robertclancy.com
+          gsutil -m rsync -d -r public gs://robertclancy.com
         project: $GOOGLE_PROJECT_ID
         token: $GOOGLE_REFRESH_TOKEN
