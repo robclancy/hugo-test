@@ -35,13 +35,15 @@ deploy:
           echo "deb https://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
           curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
           sudo apt-get update && sudo apt-get install -y -qq google-cloud-sdk
-    - script:
-        name: authenticate google-cloud-sdk
-        code: |
-          echo "$GOOGLE_SERVICE_ACCOUNT_JSON" > robclancy-5ee82cf4a4e9.json
-          cat robclancy-5ee82cf4a4e9.json
-          gcloud auth activate-service-account cloud-storage@robclancy-150106.iam.gserviceaccount.com --key-file=$(pwd)/robclancy-5ee82cf4a4e9.json
-          echo gcloud auth activate-service-account cloud-storage@robclancy-150106.iam.gserviceaccount.com --key-file=$(pwd)/robclancy-5ee82cf4a4e9.json
+    - bigtruedata/gcloud-auth-service-account:
+        key: $GOOGLE_SERVICE_ACCOUNT_JSON
+    # - script:
+    #     name: authenticate google-cloud-sdk
+    #     code: |
+    #       echo -e "$GOOGLE_SERVICE_ACCOUNT_JSON" > robclancy-5ee82cf4a4e9.json
+    #       cat robclancy-5ee82cf4a4e9.json
+    #       gcloud auth activate-service-account cloud-storage@robclancy-150106.iam.gserviceaccount.com --key-file=$(pwd)/robclancy-5ee82cf4a4e9.json
+    #       echo gcloud auth activate-service-account cloud-storage@robclancy-150106.iam.gserviceaccount.com --key-file=$(pwd)/robclancy-5ee82cf4a4e9.json
     - script:
         name: gsutil rsync
         code: |
