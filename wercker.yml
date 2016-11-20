@@ -33,7 +33,7 @@ deploy:
     - script:
         name: install gsutil
         code: |
-          sudo apt-get install google-cloud-sdk
+          curl https://sdk.cloud.google.com | bash
 
     - a13m/gcs-website-deploy@1.0.5:
         bucket: robertclancy.com
