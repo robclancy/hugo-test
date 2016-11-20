@@ -21,7 +21,7 @@ build:
     # http://devcenter.wercker.com/docs/steps/index.html
   steps:
     - arjen/hugo-build:
-        version: "0.14"
+        version: "0.17"
         theme: herring-cove
         flags: --buildDrafts=true
 deploy:
